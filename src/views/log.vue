@@ -2,7 +2,7 @@
   <demo-table :fields="fields" :filters="filters" :readonly="true"></demo-table>
 </template>
 <script>
-import DemoTable from '@/naf/data/demo-table';
+import DemoTable from '@naf/data/demo-table';
 
 export default {
   components: {
@@ -16,4 +16,3 @@ export default {
   },
 };
 </script>
-

@@ -13,9 +13,11 @@
     <el-card class="right list" size="mini" v-if="view ==  'list'">
       <div slot="header" class="clearfix">
         <span>{{(current && current.name) || '全部用户' }}</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加用户 </el-button>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加用户
+        </el-button>
       </div>
-      <data-grid :data="list" :filter="true" :meta="fields" :operation="operation" @edit="handleEdit" @delete="handleDelete" @passwd="handlePassOpen">
+      <data-grid :data="list" :filter="true" :meta="fields" :operation="operation" @edit="handleEdit" @delete="handleDelete"
+                 @passwd="handlePassOpen">
       </data-grid>
     </el-card>
     <el-card class="right details" size="mini" v-else-if="view ==  'details'">
@@ -23,7 +25,8 @@
         <span>{{form.isNew?'添加用户':'修改用户' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave" @cancel="view = 'list'">
+      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}"
+                 @save="handleSave" @cancel="view = 'list'">
       </data-form>
     </el-card>
     <el-card class="right passwd" size="mini" v-else-if="view ==  'passwd'">
@@ -31,36 +34,32 @@
         <span>设置用户密码</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form ref="passwd" :data="passwdForm" :meta="passwdFields" :options="{'label-width':'120px', size: 'small'}" @save="handlePassSave" @cancel="view = 'list'">
+      <data-form ref="passwd" :data="passwdForm" :meta="passwdFields" :options="{'label-width':'120px', size: 'small'}"
+                 @save="handlePassSave" @cancel="view = 'list'">
       </data-form>
     </el-card>
   </div>
 </template>
 <script>
-import DataForm from '@/naf/data/form';
-import DataGrid from '@/naf/data/filter-grid';
-import DeptTree from '@/naf/user/dept-tree';
+import DataForm from '@naf/data/form';
+import DataGrid from '@naf/data/filter-grid';
+import DeptTree from '@naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import config from '@frame/config';
 import * as types from '@/store/system/.dept';
 
 const { rootName } = config;
 
-const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
-  'system/user'
-);
-const {
-  mapState: mapDeptState,
-  mapActions: mapDeptActions
-} = createNamespacedHelpers('system/dept');
+const { mapState, mapActions, mapMutations } = createNamespacedHelpers('system/user');
+const { mapState: mapDeptState, mapActions: mapDeptActions } = createNamespacedHelpers('system/dept');
 
 export default {
   components: {
     DataForm,
     DataGrid,
-    DeptTree
+    DeptTree,
   },
-  async fetch({store}) {
+  async fetch({ store }) {
     // 加载字典数据
     await store.dispatch('naf/dict/load', 'status');
   },
@@ -98,17 +97,17 @@ export default {
           {
             type: 'email',
             message: '请输入有效的电子邮件地址',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         mobile: [
           {
             type: 'string',
             pattern: /\d{11}/,
             message: '请输入有效的手机号码',
-            trigger: 'blur'
-          }
-        ]
+            trigger: 'blur',
+          },
+        ],
       },
       fields: [
         { name: 'name', label: '姓名', required: true, filter: true },
@@ -118,20 +117,16 @@ export default {
           required: true,
           editable: false,
           filter: true,
-          formOpts: { placeholder: '用户唯一标识，设定后不支持修改' }
+          formOpts: { placeholder: '用户唯一标识，设定后不支持修改' },
         },
         { name: 'gender', label: '性别' },
         { name: 'position', label: '职位' },
         { name: 'mobile', label: '手机号', filter: true },
         { name: 'telephone', label: '电话' },
         { name: 'email', label: '电子邮件' },
-        { name: 'status', label: '用户状态', formatter: 'dict:status' }
+        { name: 'status', label: '用户状态', formatter: 'dict:status' },
       ],
-      operation: [
-        ['edit', '编辑', 'el-icon-edit'],
-        ['delete', '删除', 'el-icon-delete', true],
-        ['passwd', '设置密码', 'el-icon-setting']
-      ] /* 操作类型 */,
+      operation: [['edit', '编辑', 'el-icon-edit'], ['delete', '删除', 'el-icon-delete', true], ['passwd', '设置密码', 'el-icon-setting']] /* 操作类型 */,
       passwdFields: [
         { name: 'name', label: '姓名', readonly: true },
         { name: 'userid', label: '帐号', readonly: true },
@@ -148,8 +143,8 @@ export default {
           required: true,
           formOpts: { inputType: 'password' },
           rules: [{ validator: checkConfirm, trigger: 'blur' }],
-        }
-      ]
+        },
+      ],
     };
   },
   methods: {
@@ -195,24 +190,22 @@ export default {
       if (this.$checkRes(res, '用户密码设置成功')) {
         this.view = 'list';
       }
-    }
+    },
   },
   computed: {
     ...mapDeptState({ currentDept: 'current', deptItems: 'items' }),
     ...mapState(['current', 'items']),
     list() {
       const { id } = this.current || { id: 0 }; // deptartment_id
-      return this.items.filter(
-        p => id === 0 || (p.department && p.department.includes(id))
-      );
-    }
-  }
+      return this.items.filter(p => id === 0 || (p.department && p.department.includes(id)));
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
-@import './style/mixed.less';
+@import '~@/style/mixed.less';
+
 .right.list /deep/ .el-card__body {
   padding: 0;
 }
 </style>
-

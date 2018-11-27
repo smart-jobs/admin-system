@@ -29,27 +29,23 @@
   </div>
 </template>
 <script>
-import DataForm from '@/naf/data/form';
-import DataDlg from '@/naf/data/form-dlg';
-import DataGrid from '@/naf/data/filter-grid';
-import DeptTree from '@/naf/user/dept-tree';
+import DataForm from '@naf/data/form';
+import DataDlg from '@naf/data/form-dlg';
+import DataGrid from '@naf/data/filter-grid';
 import { createNamespacedHelpers } from 'vuex';
 import * as types from '@/store/system/.dict';
 import config from '@frame/config';
 const { pageSize = 10 } = config;
 
-const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
-  'system/dict'
-);
+const { mapState, mapActions, mapMutations } = createNamespacedHelpers('system/dict');
 
 export default {
   components: {
     DataForm,
     DataDlg,
     DataGrid,
-    DeptTree
   },
-  async fetch({store}) {
+  async fetch({ store }) {
     // 加载字典数据
     await store.dispatch('naf/dict/load', 'usage');
   },
@@ -72,7 +68,7 @@ export default {
       catgFields: [
         { name: 'code', label: '代码', editable: false, required: true },
         { name: 'name', label: '名称', required: true },
-        { name: 'key', label: '别名', required: true , formOpts: { placeholder: '字典类别的别名，由字母数字组成' } },
+        { name: 'key', label: '别名', required: true, formOpts: { placeholder: '字典类别的别名，由字母数字组成' } },
       ],
       filter: undefined,
     };
@@ -80,13 +76,13 @@ export default {
   computed: {
     ...mapState(['category', 'categories', 'items', 'total']),
     treeData() {
-      return this.categories.map(p=>({...p,id: p._id}));
+      return this.categories.map(p => ({ ...p, id: p._id }));
     },
     itemData() {
-      if(this.filter){
-        return this.items.filter(p=>{
-          for(const key in this.filter){
-            if(p[key] !== this.filter[key]){
+      if (this.filter) {
+        return this.items.filter(p => {
+          for (const key in this.filter) {
+            if (p[key] !== this.filter[key]) {
               return false;
             }
           }
@@ -94,13 +90,13 @@ export default {
         });
       }
       return this.items;
-    }
+    },
   },
   methods: {
     ...mapActions(['loadCatg', 'createCatg', 'deleteCatg', 'updateCatg', 'loadItem', 'createItem', 'deleteItem', 'updateItem', 'selectCatg']),
     ...mapMutations({ setCategory: types.CATG_SELECTED }),
     handleNew() {
-      if(!this.category) return ;
+      if (!this.category) return;
       this.form = { data: { category: this.category.code }, isNew: true };
       this.view = 'details';
     },
@@ -120,7 +116,7 @@ export default {
       this.selectCatg(data);
       this.$refs['dataGrid'].resetPage();
     },
-    handleQuery({filter, paging}) {
+    handleQuery({ filter, paging }) {
       this.filter = filter;
       this.loadItem(paging);
       this.currentPage = paging.page;
@@ -158,7 +154,7 @@ export default {
         await this.$confirm(`是否删除字典分类?`, '请确认', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning'
+          type: 'warning',
         });
         const res = await this.deleteCatg(data);
         this.$checkRes(res, '删除字典分类成功');
@@ -166,14 +162,14 @@ export default {
         if (err == 'cancel') {
           this.$message({
             type: 'info',
-            message: `已取消删除`
+            message: `已取消删除`,
           });
         }
       }
     },
     handleNavCmd(cmd, data) {
-      console.debug('nav command:', cmd, data);
-      if(cmd === 'edit') {
+      // console.debug('nav command:', cmd, data);
+      if (cmd === 'edit') {
         this.handleEditCatg(data);
       } else if (cmd === 'delete') {
         this.handleDeleteCatg(data);
@@ -181,12 +177,12 @@ export default {
     },
     renderNavNode(h, { node, data /* , store */ }) {
       const clickHandler = e => {
-        console.debug('show nav dropdown:', data);
+        // console.debug('show nav dropdown:', data);
         e.stopPropagation();
       };
-      const handleCommand = (cmd) => {
+      const handleCommand = cmd => {
         this.handleNavCmd(cmd, data);
-      }
+      };
       return (
         <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
           <span>
@@ -206,12 +202,12 @@ export default {
           </el-dropdown>
         </span>
       );
-    }
+    },
   },
 };
 </script>
 <style lang="less" scoped>
-@import './style/mixed.less';
+@import '~@/style/mixed.less';
 
 .left {
   /deep/ .el-card__body {

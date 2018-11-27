@@ -13,20 +13,24 @@ const router = new Router({
       component: Home,
     },
     {
-      path: '/corp/:status/register',
-      component: () => import(/* webpackChunkName: "corp_status" */ './views/corp/_status/register.vue'),
+      path: '/dict',
+      component: () => import(/* webpackChunkName: "dict" */ './views/dict.vue'),
     },
     {
-      path: '/campus/:status',
-      component: () => import(/* webpackChunkName: "campus_status" */ './views/campus/_status.vue'),
+      path: '/unit',
+      component: () => import(/* webpackChunkName: "unit" */ './views/unit.vue'),
     },
     {
-      path: '/jobfair/:status',
-      component: () => import(/* webpackChunkName: "jobfair_status" */ './views/jobfair/_status.vue'),
+      path: '/dept',
+      component: () => import(/* webpackChunkName: "dept" */ './views/dept.vue'),
     },
     {
-      path: '/jobinfo/:status',
-      component: () => import(/* webpackChunkName: "jobinfo_status" */ './views/jobinfo/_status.vue'),
+      path: '/tag',
+      component: () => import(/* webpackChunkName: "tag" */ './views/tag.vue'),
+    },
+    {
+      path: '/user',
+      component: () => import(/* webpackChunkName: "user" */ './views/user.vue'),
     },
   ],
 });
