@@ -7,6 +7,7 @@ import '@/plugins/element';
 import '@/plugins/mint-ui';
 import '@lib/plugins/axios';
 import '@lib/plugins/check-res';
+import '@lib/plugins/naf-dict';
 import { createStore } from '@lib/utils/store';
 
 Vue.config.productionTip = false;

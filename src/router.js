@@ -5,7 +5,7 @@ import Home from './views/home.vue';
 Vue.use(Router);
 
 const router = new Router({
-  mode: process.env.VUE_APP_ROUTER_MODE || 'history',
+  // mode: process.env.VUE_APP_ROUTER_MODE || 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -14,23 +14,23 @@ const router = new Router({
     },
     {
       path: '/dict',
-      component: () => import(/* webpackChunkName: "dict" */ './views/dict.vue'),
+      component: () => import(/* webpackChunkName: "system_dict" */ './views/dict.vue'),
     },
     {
       path: '/unit',
-      component: () => import(/* webpackChunkName: "unit" */ './views/unit.vue'),
+      component: () => import(/* webpackChunkName: "system_unit" */ './views/unit.vue'),
     },
     {
       path: '/dept',
-      component: () => import(/* webpackChunkName: "dept" */ './views/dept.vue'),
+      component: () => import(/* webpackChunkName: "system_dept" */ './views/dept.vue'),
     },
     {
       path: '/tag',
-      component: () => import(/* webpackChunkName: "tag" */ './views/tag.vue'),
+      component: () => import(/* webpackChunkName: "system_tag" */ './views/tag.vue'),
     },
     {
       path: '/user',
-      component: () => import(/* webpackChunkName: "user" */ './views/user.vue'),
+      component: () => import(/* webpackChunkName: "system_user" */ './views/user.vue'),
     },
   ],
 });
