@@ -1,4 +1,3 @@
-
 // mutation types
 export const CATG_LOADED = 'CATG_LOADED';
 export const CATG_SELECTED = 'CATG_SELECTED';
