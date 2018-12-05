@@ -3,16 +3,19 @@
     <el-card class="left" v-show="view ==  'list'">
       <div slot="header" class="top">
         <span>字典分类</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewCatg"> </el-button>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewCatg">
+        </el-button>
       </div>
-      <el-tree :data="treeData" :props="{label: 'name'}" @node-click="handleSetCatg" :render-content="renderNavNode" :highlight-current="true"></el-tree>
+      <el-tree :data="treeData" :props="{label: 'name'}" @node-click="handleSetCatg" :render-content="renderNavNode"
+               :highlight-current="true"></el-tree>
     </el-card>
     <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
         <span>{{(category && category.name) || '字典数据' }}</span>
         <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" :disabled="!category">添加字典项</el-button>
       </div>
-      <data-grid ref="dataGrid" :data="itemData" :filter="false" :paging="true" :total="total" :page-size="pageSize" :meta="fields" @edit="handleEdit" @delete="handleDelete" @query="handleQuery">
+      <data-grid ref="dataGrid" :data="itemData" :filter="false" :paging="true" :total="total" :page-size="pageSize"
+                 :meta="fields" @edit="handleEdit" @delete="handleDelete" @query="handleQuery">
       </data-grid>
     </el-card>
     <el-card class="right details" size="mini" v-else>
@@ -20,11 +23,12 @@
         <span>{{form.isNew?'添加字典项':'修改字典项' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :options="{'label-width':'120px', size: 'small'}" @save="handleSave"  @cancel="view = 'list'">
+      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :options="{'label-width':'120px', size: 'small'}"
+                 @save="handleSave" @cancel="view = 'list'">
       </data-form>
     </el-card>
-    <data-dlg title="字典类别" width="400px" v-if="catgDlg" :visible.sync="catgDlg" :data="catgForm.data" :is-new="catgForm.isNew" 
-      :options="{'label-width':'80px', size: 'mini'}" :meta="catgFields" @save="handleSaveCatg" @cancel="catgDlg = false">
+    <data-dlg title="字典类别" width="400px" v-if="catgDlg" :visible.sync="catgDlg" :data="catgForm.data" :is-new="catgForm.isNew"
+              :options="{'label-width':'80px', size: 'mini'}" :meta="catgFields" @save="handleSaveCatg" @cancel="catgDlg = false">
     </data-dlg>
   </div>
 </template>
@@ -71,6 +75,7 @@ export default {
         { name: 'key', label: '别名', required: true, formOpts: { placeholder: '字典类别的别名，由字母数字组成' } },
       ],
       filter: undefined,
+      pageSize,
     };
   },
   computed: {
