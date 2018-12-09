@@ -6,8 +6,10 @@
         <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewUnit">
         </el-button>
       </div>
-      <el-tree :disabled="true" :data="treeData" :props="{label: 'name'}" @node-click="selectUnit" :render-content="renderNavNode"
-               :highlight-current="true"></el-tree>
+      <el-scrollbar>
+        <el-tree :disabled="true" :data="treeData" :props="{label: 'name'}" @node-click="selectUnit" :render-content="renderNavNode"
+                 :highlight-current="true"></el-tree>
+      </el-scrollbar>
     </el-card>
     <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
