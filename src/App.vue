@@ -18,8 +18,8 @@ export default {
   },
   name: 'App',
   metaInfo: {
-    title: '就业系统',
-    titleTemplate: '就业系统 - %s',
+    title: '系统管理',
+    titleTemplate: '系统管理 - %s',
   },
   async mounted() {
     // const res = await this.load();
