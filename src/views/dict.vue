@@ -124,7 +124,6 @@ export default {
     handleQuery({ filter, paging }) {
       this.filter = filter;
       this.loadItem(paging);
-      this.currentPage = paging.page;
     },
     async handleSave(payload) {
       let res;

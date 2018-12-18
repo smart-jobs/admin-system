@@ -4,7 +4,7 @@ const frameSrc = path.resolve(__dirname, '../admin-frame');
 
 module.exports = {
   // baseUrl: './',
-  baseUrl: process.env.VUE_APP_ROOT_URL + '/system',
+  baseUrl: process.env.VUE_APP_ROOT_URL + 'system',
 
   configureWebpack: {
     externals: {
