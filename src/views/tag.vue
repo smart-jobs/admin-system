@@ -3,27 +3,31 @@
     <el-card class="left">
       <div slot="header" class="top">
         <span>标签</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="editable">
-        </el-button>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="editable"> </el-button>
       </div>
-      <el-tree :data="treeData" :props="{label: 'tagname'}" @node-click="selectTag" :render-content="renderNavNode"
-               :highlight-current="true"></el-tree>
+      <el-tree :data="treeData" :props="{ label: 'tagname' }" @node-click="selectTag" :render-content="renderNavNode" :highlight-current="true"></el-tree>
     </el-card>
     <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
-        <span>{{(current && current.tagname) || '标签用户' }}</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewItem"
-                   :disabled="!current">添加部门/成员</el-button>
+        <span>{{ (current && current.tagname) || '标签用户' }}</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewItem" :disabled="!current">添加部门/成员</el-button>
       </div>
-      <data-grid :data="items" :filter="false" :meta="fields" :operation="operation" @delete="handleDelItem">
-      </data-grid>
+      <data-grid :data="items" :filter="false" :meta="fields" :operation="operation" @delete="handleDelItem"> </data-grid>
     </el-card>
-    <data-dlg :title="form.isNew?'添加标签':'修改标签'" width="400px" v-if="showForm" :visible.sync="showForm" :data="form.data"
-              :is-new="form.isNew" :options="{'label-width':'80px', size: 'mini'}" :meta="tagFields" @save="handleSave"
-              @cancel="showForm = false">
+    <data-dlg
+      :title="form.isNew ? '添加标签' : '修改标签'"
+      width="400px"
+      v-if="showForm"
+      :visible.sync="showForm"
+      :data="form.data"
+      :is-new="form.isNew"
+      :options="{ 'label-width': '80px', size: 'mini' }"
+      :meta="tagFields"
+      @save="handleSave"
+      @cancel="showForm = false"
+    >
     </data-dlg>
-    <user-select title="添加成员/部门到标签" width="400px" v-if="showSelect" :visible.sync="showSelect" @cancel="showSelect = false"
-                 @ok="handleAddItem">
+    <user-select title="添加成员/部门到标签" width="400px" v-if="showSelect" :visible.sync="showSelect" @cancel="showSelect = false" @ok="handleAddItem">
     </user-select>
   </div>
 </template>
