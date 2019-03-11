@@ -1,8 +1,8 @@
 <template>
   <div class="mixed">
-    <el-card class="left" v-show="view ==  'list'">
+    <el-card class="left" v-show="view == 'list'">
       <div slot="header" class="top">
-        <span>{{rootName}}</span>
+        <span>{{ rootName }}</span>
         <el-tooltip content="取消选择">
           <i class="naf-icons naf-icon-clearup" style="float: right; padding: 3px 0" @click="resetCurrent()" />
         </el-tooltip>
@@ -10,32 +10,43 @@
       </div>
       <dept-tree ref="dept-tree" @selected="setCurrent" :data-items="deptItems"></dept-tree>
     </el-card>
-    <el-card class="right list" size="mini" v-if="view ==  'list'">
+    <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
-        <span>{{(current && current.name) || '全部用户' }}</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加用户
-        </el-button>
+        <span>{{ (current && current.name) || '全部用户' }}</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加用户 </el-button>
       </div>
-      <data-grid :data="list" :filter="true" :meta="fields" :operation="operation" @edit="handleEdit" @delete="handleDelete"
-                 @passwd="handlePassOpen">
+      <data-grid :data="list" :filter="true" :meta="fields" :operation="operation" @edit="handleEdit" @delete="handleDelete" @passwd="handlePassOpen">
       </data-grid>
     </el-card>
-    <el-card class="right details" size="mini" v-else-if="view ==  'details'">
+    <el-card class="right details" size="mini" v-else-if="view == 'details'">
       <div slot="header" class="clearfix">
-        <span>{{form.isNew?'添加用户':'修改用户' }}</span>
+        <span>{{ form.isNew ? '添加用户' : '修改用户' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}"
-                 @save="handleSave" @cancel="view = 'list'">
+      <data-form
+        :data="form.data"
+        :is-new="form.isNew"
+        :meta="fields"
+        :rules="rules"
+        :options="{ 'label-width': '120px', size: 'small' }"
+        @save="handleSave"
+        @cancel="view = 'list'"
+      >
       </data-form>
     </el-card>
-    <el-card class="right passwd" size="mini" v-else-if="view ==  'passwd'">
+    <el-card class="right passwd" size="mini" v-else-if="view == 'passwd'">
       <div slot="header" class="clearfix">
         <span>设置用户密码</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form ref="passwd" :data="passwdForm" :meta="passwdFields" :options="{'label-width':'120px', size: 'small'}"
-                 @save="handlePassSave" @cancel="view = 'list'">
+      <data-form
+        ref="passwd"
+        :data="passwdForm"
+        :meta="passwdFields"
+        :options="{ 'label-width': '120px', size: 'small' }"
+        @save="handlePassSave"
+        @cancel="view = 'list'"
+      >
       </data-form>
     </el-card>
   </div>

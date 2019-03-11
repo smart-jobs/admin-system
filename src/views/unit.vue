@@ -3,45 +3,70 @@
     <el-card class="left" v-show="view == 'list'">
       <div slot="header" class="top">
         <span>省内高校</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewUnit">
-        </el-button>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewUnit"> </el-button>
       </div>
       <el-scrollbar>
-        <el-tree :disabled="true" :data="treeData" :props="{label: 'name'}" @node-click="selectUnit" :render-content="renderNavNode"
-                 :highlight-current="true"></el-tree>
+        <el-tree
+          :disabled="true"
+          :data="treeData"
+          :props="{ label: 'name' }"
+          @node-click="selectUnit"
+          :render-content="renderNavNode"
+          :highlight-current="true"
+        ></el-tree>
       </el-scrollbar>
     </el-card>
     <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
-        <span>{{(current && current.name) || '单位管理员' }}</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewUser"
-                   :disabled="!current">添加管理员</el-button>
+        <span>{{ (current && current.name) || '单位管理员' }}</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewUser" :disabled="!current">添加管理员</el-button>
       </div>
-      <data-grid :data="users" :filter="false" :meta="fields" @edit="handleEditUser" @delete="handleDeleteUser" @passwd="handlePassOpen"
-                 :operation="operation">
+      <data-grid :data="users" :filter="false" :meta="fields" @edit="handleEditUser" @delete="handleDeleteUser" @passwd="handlePassOpen" :operation="operation">
       </data-grid>
     </el-card>
-    <el-card class="right details" size="mini" v-else-if="view ==  'details'">
+    <el-card class="right details" size="mini" v-else-if="view == 'details'">
       <div slot="header" class="clearfix">
-        <span>{{userForm.isNew?'添加管理员':'修改管理员' }}</span>
+        <span>{{ userForm.isNew ? '添加管理员' : '修改管理员' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="userForm.data" :is-new="userForm.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}"
-                 @save="handleSaveUser" @cancel="view = 'list'">
+      <data-form
+        :data="userForm.data"
+        :is-new="userForm.isNew"
+        :meta="fields"
+        :rules="rules"
+        :options="{ 'label-width': '120px', size: 'small' }"
+        @save="handleSaveUser"
+        @cancel="view = 'list'"
+      >
       </data-form>
     </el-card>
-    <el-card class="right passwd" size="mini" v-else-if="view ==  'passwd'">
+    <el-card class="right passwd" size="mini" v-else-if="view == 'passwd'">
       <div slot="header" class="clearfix">
         <span>设置管理员密码</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form ref="passwd" :data="passwdForm" :meta="passwdFields" :options="{'label-width':'120px', size: 'small'}"
-                 @save="handlePassSave" @cancel="view = 'list'">
+      <data-form
+        ref="passwd"
+        :data="passwdForm"
+        :meta="passwdFields"
+        :options="{ 'label-width': '120px', size: 'small' }"
+        @save="handlePassSave"
+        @cancel="view = 'list'"
+      >
       </data-form>
     </el-card>
-    <data-dlg :title="form.isNew?'添加单位':'修改单位'" width="400px" v-if="showDlg" :visible.sync="showDlg" :data="form.data"
-              :is-new="form.isNew" :options="{'label-width':'80px', size: 'mini'}" :meta="unitFields" @save="handleSaveUnit"
-              @cancel="showDlg = false">
+    <data-dlg
+      :title="form.isNew ? '添加单位' : '修改单位'"
+      width="400px"
+      v-if="showDlg"
+      :visible.sync="showDlg"
+      :data="form.data"
+      :is-new="form.isNew"
+      :options="{ 'label-width': '80px', size: 'mini' }"
+      :meta="unitFields"
+      @save="handleSaveUnit"
+      @cancel="showDlg = false"
+    >
     </data-dlg>
   </div>
 </template>

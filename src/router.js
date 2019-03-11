@@ -18,7 +18,7 @@ const router = new Router({
     },
     {
       path: '/unit',
-      component: () => import(/* webpackChunkName: "system_unit" */ './views/unit.vue'),
+      component: () => import(/* webpackChunkName: "system_unit" */ './views/unit-lite.vue'),
     },
     {
       path: '/dept',

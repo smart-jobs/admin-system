@@ -1,8 +1,8 @@
 <template>
   <div class="mixed">
-    <el-card class="left" v-show="view ==  'list'">
+    <el-card class="left" v-show="view == 'list'">
       <div slot="header" class="top">
-        <span>{{rootName}}</span>
+        <span>{{ rootName }}</span>
         <el-tooltip content="取消选择">
           <i class="naf-icons naf-icon-clearup" style="float: right; padding: 3px 0" @click="resetCurrent()" />
         </el-tooltip>
@@ -10,22 +10,27 @@
       </div>
       <dept-tree ref="dept-tree" @selected="setCurrent" :data-items="items"></dept-tree>
     </el-card>
-    <el-card class="right list" size="mini" v-if="view ==  'list'">
+    <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
-        <span>{{(current && current.name) || '&nbsp;' }}</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加子部门
-        </el-button>
+        <span>{{ (current && current.name) || '&nbsp;' }}</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加子部门 </el-button>
       </div>
-      <data-grid :data="list" :filter="false" :meta="fields" @edit="handleEdit" @delete="handleDelete">
-      </data-grid>
+      <data-grid :data="list" :filter="false" :meta="fields" @edit="handleEdit" @delete="handleDelete"> </data-grid>
     </el-card>
     <el-card class="right details" size="mini" v-else>
       <div slot="header" class="clearfix">
-        <span>{{form.isNew?'添加部门':'修改部门' }}</span>
+        <span>{{ form.isNew ? '添加部门' : '修改部门' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}"
-                 @save="handleSave" @cancel="view = 'list'">
+      <data-form
+        :data="form.data"
+        :is-new="form.isNew"
+        :meta="fields"
+        :rules="rules"
+        :options="{ 'label-width': '120px', size: 'small' }"
+        @save="handleSave"
+        @cancel="view = 'list'"
+      >
       </data-form>
     </el-card>
   </div>

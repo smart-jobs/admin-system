@@ -5,23 +5,23 @@ const items = [
     icon: 'system',
     module: 'system',
     children: [
+      // {
+      //   title: '用户管理',
+      //   path: '/user',
+      //   icon: 'account',
+      // },
+      // {
+      //   title: '部门管理',
+      //   path: '/dept',
+      //   icon: 'dept',
+      // },
+      // {
+      //   title: '标签用户',
+      //   path: '/tag',
+      //   icon: 'tag',
+      // },
       {
-        title: '用户管理',
-        path: '/user',
-        icon: 'account',
-      },
-      {
-        title: '部门管理',
-        path: '/dept',
-        icon: 'dept',
-      },
-      {
-        title: '标签用户',
-        path: '/tag',
-        icon: 'tag',
-      },
-      {
-        title: '单位管理',
+        title: '省内高校',
         path: '/unit',
         icon: 'corp',
         platform: 'master',
@@ -37,29 +37,6 @@ const items = [
       //   path: '/log',
       //   icon: 'log',
       // },
-    ],
-  },
-  {
-    title: '信息发布',
-    path: '/cms',
-    icon: 'news',
-    module: 'cms',
-    children: [
-      {
-        title: '通知公告',
-        path: '/cms/notice',
-        icon: 'column',
-      },
-      {
-        title: '政策法规',
-        path: '/cms/policy',
-        icon: 'column',
-      },
-      {
-        title: '新闻栏目',
-        path: '/cms/news',
-        icon: 'column',
-      },
     ],
   },
 ];
