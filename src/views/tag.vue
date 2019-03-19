@@ -198,7 +198,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import '~@/style/mixed.less';
+@import '~@lib/style/mixed.less';
 
 .left {
   /deep/ .el-card__body {
